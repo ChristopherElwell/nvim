@@ -72,6 +72,10 @@ do
   --   and `:help lua-guide-options`
   vim.o.list = true
   vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+  vim.opt.tabstop = 4
+  vim.opt.shiftwidth = 4
+  vim.opt.softtabstop = 4
+  vim.opt.expandtab = true
 
   -- Preview substitutions live, as you type!
   vim.o.inccommand = 'split'
@@ -352,14 +356,27 @@ vim.pack.add { gh 'folke/tokyonight.nvim' }
   --  and try some other statusline plugin
   local statusline = require 'mini.statusline'
   -- Set `use_icons` to true if you have a Nerd Font
-  statusline.setup { use_icons = vim.g.have_nerd_font }
+  statusline.setup {
+    use_icons = vim.g.have_nerd_font,
+   content = {
+      active = function()
+        local mode, mode_hl = MiniStatusline.section_mode { trunc_width = 120 }
+        local git = MiniStatusline.section_git { trunc_width = 40 }
+        local diagnostics = MiniStatusline.section_diagnostics { trunc_width = 75 }
+        local filename = MiniStatusline.section_filename { trunc_width = 140 }
+        local datetime = os.date '%Y-%m-%d %I:%M %p'
 
-  -- You can configure sections in the statusline by overriding their
-  -- default behavior. For example, here we set the section for
-  -- cursor location to LINE:COLUMN
-  ---@diagnostic disable-next-line: duplicate-set-field
-  statusline.section_location = function() return '%2l:%-2v' end
-
+        return MiniStatusline.combine_groups {
+          { hl = mode_hl, strings = { mode } },
+          { hl = 'MiniStatuslineDevinfo', strings = { git, diagnostics } },
+          '%<', -- truncation point
+          { hl = 'MiniStatuslineFilename', strings = { filename } },
+          '%=', -- right-align everything after this
+          { hl = 'MiniStatuslineFilename', strings = { datetime } },
+        }
+      end,
+    },
+  }
   -- ... and there is more!
   --  Check out: https://github.com/nvim-mini/mini.nvim
 end
@@ -607,9 +624,24 @@ do
   --  See `:help lsp-config` for information about keys and how to configure
   ---@type table<string, vim.lsp.Config>
   local servers = {
-    -- clangd = {},
+    clangd = {
+      cmd = {
+    'clangd',
+    '--background-index',       -- index the whole project in the background, not just open files
+    '--clang-tidy',              -- enable clang-tidy lint checks as diagnostics
+    '--header-insertion=iwyu',   -- auto-insert #include when accepting a completion
+    '--completion-style=detailed',
+    '--function-arg-placeholders',
+    '--fallback-style=llvm',     -- formatting style to use if no .clang-format file exists
+  },
+  init_options = {
+    usePlaceholders = true,
+    completeUnimported = true,
+    clangdFileStatus = true,
+  },
+    },
     -- gopls = {},
-    -- pyright = {},
+    pyright = {},
     -- rust_analyzer = {},
     --
     -- Some languages (like typescript) have entire language plugins that can be useful:
