@@ -1,6 +1,4 @@
 -- ============================================================
--- SECTION 1: OPTIONS
--- Core Neovim settings, leaders, options
 -- ============================================================
 do
   -- Enable faster startup by caching compiled Lua modules
@@ -624,24 +622,9 @@ do
   --  See `:help lsp-config` for information about keys and how to configure
   ---@type table<string, vim.lsp.Config>
   local servers = {
-    clangd = {
-      cmd = {
-    'clangd',
-    '--background-index',       -- index the whole project in the background, not just open files
-    '--clang-tidy',              -- enable clang-tidy lint checks as diagnostics
-    '--header-insertion=iwyu',   -- auto-insert #include when accepting a completion
-    '--completion-style=detailed',
-    '--function-arg-placeholders',
-    '--fallback-style=llvm',     -- formatting style to use if no .clang-format file exists
-  },
-  init_options = {
-    usePlaceholders = true,
-    completeUnimported = true,
-    clangdFileStatus = true,
-  },
-    },
+    -- clangd = {},
     -- gopls = {},
-    pyright = {},
+    -- pyright = {},
     -- rust_analyzer = {},
     --
     -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -906,31 +889,38 @@ do
 end
 
 -- ============================================================
--- SECTION 10: OPTIONAL EXAMPLES / NEXT STEPS
--- kickstart.plugins.* examples
+-- SECTION 10: MY PLUGINS
+-- My stuff
 -- ============================================================
-do
-  -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
-  -- init.lua. If you want these files, they are in the repository, so you can just download them and
-  -- place them in the correct locations.
 
-  -- NOTE: Next step on your Neovim journey: Add/Configure additional plugins for Kickstart
-  --
-  --  Here are some example plugins that I've included in the Kickstart repository.
-  --  Uncomment any of the lines below to enable them (you will need to restart nvim).
-  --
-  -- require 'kickstart.plugins.debug'
-  -- require 'kickstart.plugins.indent_line'
-  -- require 'kickstart.plugins.lint'
-  -- require 'kickstart.plugins.autopairs'
-  -- require 'kickstart.plugins.neo-tree'
-  -- require 'kickstart.plugins.gitsigns' -- adds gitsigns recommended keymaps
+-- Neo-Tree
+vim.pack.add {
+  gh 'nvim-neo-tree/neo-tree.nvim',
+  gh 'nvim-lua/plenary.nvim',
+  gh 'nvim-tree/nvim-web-devicons',
+  gh 'MunifTanjim/nui.nvim',
+}
+require('neo-tree').setup {
+  close_if_last_window = true,
+  filesystem = {
+    filtered_items = {
+      visible = false, -- set true if you want dotfiles/hidden files shown by default
+      hide_dotfiles = true,
+      hide_gitignored = true,
+    },
+    follow_current_file = { enabled = true },
+  },
+  window = {
+    width = 30,
+  },
+}
+vim.keymap.set('n', '<leader>e', '<cmd>Neotree toggle<cr>', { desc = 'Toggle file [E]xplorer' })
 
-  -- NOTE: You can add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-  --
-  --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-  -- require 'custom.plugins'
-end
+-- Toggle Term
+vim.pack.add { gh 'akinsho/toggleterm.nvim' }
 
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
+require('toggleterm').setup {
+  direction = 'vertical',
+  size = 60,
+  open_mapping = [[<C-\>]], -- press Ctrl+\ to toggle
+}
