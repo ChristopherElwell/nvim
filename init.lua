@@ -924,3 +924,31 @@ require('toggleterm').setup {
   size = 60,
   open_mapping = [[<C-\>]], -- press Ctrl+\ to toggle
 }
+
+-- Git
+vim.pack.add {
+  gh 'NeogitOrg/neogit',
+  gh 'sindrets/diffview.nvim',
+  gh 'nvim-lua/plenary.nvim',    -- neogit dependency
+  gh 'nvim-telescope/telescope.nvim', -- optional, gives neogit nicer branch/commit pickers
+}
+
+require('neogit').setup {
+  integrations = {
+    diffview = true,   -- lets you jump straight from neogit into a diffview diff
+  },
+}
+
+require('diffview').setup {}
+
+vim.keymap.set('n', '<leader>gg', '<cmd>Neogit<cr>', { desc = '[G]it status/[G]raph' })
+vim.keymap.set('n', '<leader>gh', '<cmd>DiffviewFileHistory<cr>', { desc = '[G]it file [H]istory' })
+vim.keymap.set('n', '<leader>gb', '<cmd>DiffviewOpen main...HEAD<cr>', { desc = '[G]it diff vs [B]ranch' })
+
+vim.pack.add {
+  gh 'kdheepak/lazygit.nvim',
+  gh 'nvim-lua/plenary.nvim', -- dependency
+}
+-- require('lazygit').setup {}
+
+vim.keymap.set('n', '<leader>lg', '<cmd>LazyGit<cr>', { desc = '[G]it ([G]ui via lazygit)' })

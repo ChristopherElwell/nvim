@@ -14,9 +14,17 @@
       "rev": "619363c30309d29ffa631e67c8183f2a72caa373",
       "src": "https://github.com/stevearc/conform.nvim"
     },
+    "diffview.nvim": {
+      "rev": "4516612fe98ff56ae0415a259ff6361a89419b0a",
+      "src": "https://github.com/sindrets/diffview.nvim"
+    },
     "fidget.nvim": {
       "rev": "6f793b2bcd2d35e201c09520f698bb763220908a",
       "src": "https://github.com/j-hui/fidget.nvim"
+    },
+    "gitgraph.nvim": {
+      "rev": "c16daa7d7dd597caf9085644c009cfa80b75db8e",
+      "src": "https://github.com/isakbm/gitgraph.nvim"
     },
     "gitsigns.nvim": {
       "rev": "31d6fb2d618bca1482b9f274751ead5f03461408",
@@ -38,6 +46,10 @@
       "rev": "bb85e4bfc8d89b0e62c8fa53ccdd13d12e2f77b3",
       "src": "https://github.com/rebelot/kanagawa.nvim"
     },
+    "lazygit.nvim": {
+      "rev": "a04ad0dbc725134edbee3a5eea29290976695357",
+      "src": "https://github.com/kdheepak/lazygit.nvim"
+    },
     "mason-lspconfig.nvim": {
       "rev": "67029ccdac1ef8941e13b826417bc0ffac24cc86",
       "src": "https://github.com/mason-org/mason-lspconfig.nvim"
@@ -57,6 +69,10 @@
     "neo-tree.nvim": {
       "rev": "6679b9395526b52ddb2b137fcd5255dab71c5a58",
       "src": "https://github.com/nvim-neo-tree/neo-tree.nvim"
+    },
+    "neogit": {
+      "rev": "37e0f22a2345bad1bffe01b31970885882f46275",
+      "src": "https://github.com/NeogitOrg/neogit"
     },
     "nui.nvim": {
       "rev": "de740991c12411b663994b2860f1a4fd0937c130",
