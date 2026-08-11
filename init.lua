@@ -295,17 +295,6 @@ do
 
   -- [[ Colorscheme ]]
   -- You can easily change to a different colorscheme.
-  -- Change the name of the colorscheme plugin below, and then
-  -- change the command under that to load whatever the name of that colorscheme is.
-  --
-  -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-vim.pack.add { gh 'folke/tokyonight.nvim' }
-  ---@diagnostic disable-next-line: missing-fields
-  require('tokyonight').setup {
-    styles = {
-      comments = { italic = false }, -- Disable italics in comments
-    },
-  }
 
   -- Colorscheme
   vim.pack.add({
@@ -354,23 +343,25 @@ vim.pack.add { gh 'folke/tokyonight.nvim' }
   require('mini.surround').setup()
 
   -- Simple and easy statusline.
-  --  You could remove this setup call if you don't like it,
-  --  and try some other statusline plugin
   local statusline = require 'mini.statusline'
-  -- Set `use_icons` to true if you have a Nerd Font
   statusline.setup {
-    use_icons = vim.g.have_nerd_font,
-   content = {
+    use_icons = true,
+    content = {
       active = function()
         local mode, mode_hl = MiniStatusline.section_mode { trunc_width = 120 }
         local git = MiniStatusline.section_git { trunc_width = 40 }
+        local diff = MiniStatusline.section_diff { trunc_width = 75 }
         local diagnostics = MiniStatusline.section_diagnostics { trunc_width = 75 }
+        local lsp = MiniStatusline.section_lsp { trunc_width = 75, icon = 'LSP' }
         local filename = MiniStatusline.section_filename { trunc_width = 140 }
         local datetime = os.date '%Y-%m-%d %I:%M %p'
 
         return MiniStatusline.combine_groups {
           { hl = mode_hl, strings = { mode } },
-          { hl = 'MiniStatuslineDevinfo', strings = { git, diagnostics } },
+          { hl = 'MiniStatuslineGit', strings = { git } },
+          { hl = 'MiniStatuslineDiff', strings = { diff } },
+          { hl = 'MiniStatuslineDevinfo', strings = { diagnostics } },
+          { hl = 'MiniStatuslineLsp', strings = { lsp } },
           '%<', -- truncation point
           { hl = 'MiniStatuslineFilename', strings = { filename } },
           '%=', -- right-align everything after this
@@ -379,8 +370,7 @@ vim.pack.add { gh 'folke/tokyonight.nvim' }
       end,
     },
   }
-  -- ... and there is more!
-  --  Check out: https://github.com/nvim-mini/mini.nvim
+
 end
 
 -- ============================================================
