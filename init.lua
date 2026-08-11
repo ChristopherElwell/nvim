@@ -310,7 +310,18 @@ vim.pack.add { gh 'folke/tokyonight.nvim' }
   -- Load the colorscheme here.
   -- Like many other themes, this one has different styles, and you could load
   -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-  vim.cmd.colorscheme 'tokyonight-night'
+  -- vim.cmd.colorscheme 'tokyonight-night'
+
+  -- Gruvbox
+  vim.pack.add({
+    gh "sainnhe/gruvbox-material"
+  })
+  vim.opt.termguicolors = true
+  vim.opt.background = 'dark'
+  vim.g.gruvbox_material_background = 'hard'   -- 'hard', 'medium', or 'soft'
+  vim.g.gruvbox_material_better_performance = 1 -- optional, faster load
+
+  vim.cmd.colorscheme('gruvbox-material')
 
   -- Highlight todo, notes, etc in comments
   vim.pack.add { gh 'folke/todo-comments.nvim' }
@@ -686,9 +697,7 @@ do
   --
   -- You can press `g?` for help in this menu.
   local ensure_installed = vim.tbl_keys(servers or {})
-  vim.list_extend(ensure_installed, {
-    'html', 'css', 'javascript', 'lua', 'vim', 'vimdoc', 'markdown'
-  })
+  vim.list_extend(ensure_installed, {})
 
   require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -778,7 +787,7 @@ do
       -- <c-k>: Toggle signature help
       --
       -- See `:help blink-cmp-config-keymap` for defining your own keymap
-      preset = 'default',
+      preset = 'super-tab',
 
       -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
       --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
@@ -830,7 +839,7 @@ do
   vim.pack.add { { src = gh 'nvim-treesitter/nvim-treesitter', version = 'main' } }
 
   -- Ensure basic parsers are installed
-  local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
+  local parsers = { 'bash', 'c', 'diff', 'html', 'css', 'javascript', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
   require('nvim-treesitter').install(parsers)
 
   ---@param buf integer
