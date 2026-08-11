@@ -307,21 +307,14 @@ vim.pack.add { gh 'folke/tokyonight.nvim' }
     },
   }
 
-  -- Load the colorscheme here.
-  -- Like many other themes, this one has different styles, and you could load
-  -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-  -- vim.cmd.colorscheme 'tokyonight-night'
-
-  -- Gruvbox
+  -- Colorscheme
   vim.pack.add({
-    gh "sainnhe/gruvbox-material"
+    gh "morhetz/gruvbox"
   })
   vim.opt.termguicolors = true
   vim.opt.background = 'dark'
-  vim.g.gruvbox_material_background = 'hard'   -- 'hard', 'medium', or 'soft'
-  vim.g.gruvbox_material_better_performance = 1 -- optional, faster load
 
-  vim.cmd.colorscheme('gruvbox-material')
+  vim.cmd.colorscheme('gruvbox')
 
   -- Highlight todo, notes, etc in comments
   vim.pack.add { gh 'folke/todo-comments.nvim' }
