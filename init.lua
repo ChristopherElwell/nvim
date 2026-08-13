@@ -342,35 +342,59 @@ do
   -- - sr)'  - [S]urround [R]eplace [)] [']
   require('mini.surround').setup()
 
-  -- Simple and easy statusline.
-  local statusline = require 'mini.statusline'
-  statusline.setup {
-    use_icons = true,
-    content = {
-      active = function()
-        local mode, mode_hl = MiniStatusline.section_mode { trunc_width = 120 }
-        local git = MiniStatusline.section_git { trunc_width = 40 }
-        local diff = MiniStatusline.section_diff { trunc_width = 75 }
-        local diagnostics = MiniStatusline.section_diagnostics { trunc_width = 75 }
-        local lsp = MiniStatusline.section_lsp { trunc_width = 75, icon = 'LSP' }
-        local filename = MiniStatusline.section_filename { trunc_width = 140 }
-        local datetime = os.date '%Y-%m-%d %I:%M %p'
+  require('mini.pairs').setup({
+    modes = { insert = true, command = false, terminal = false },
 
-        return MiniStatusline.combine_groups {
-          { hl = mode_hl, strings = { mode } },
-          { hl = 'MiniStatuslineGit', strings = { git } },
-          { hl = 'MiniStatuslineDiff', strings = { diff } },
-          { hl = 'MiniStatuslineDevinfo', strings = { diagnostics } },
-          { hl = 'MiniStatuslineLsp', strings = { lsp } },
-          '%<', -- truncation point
-          { hl = 'MiniStatuslineFilename', strings = { filename } },
-          '%=', -- right-align everything after this
-          { hl = 'MiniStatuslineFilename', strings = { datetime } },
-        }
-      end,
+    -- Global mappings, applied in all buffers
+    mappings = {
+      ['('] = { action = 'open', pair = '()', neigh_pattern = '[^\\].' },
+      ['['] = { action = 'open', pair = '[]', neigh_pattern = '[^\\].' },
+      ['{'] = { action = 'open', pair = '{}', neigh_pattern = '[^\\].' },
+
+      [')'] = { action = 'close', pair = '()', neigh_pattern = '[^\\].' },
+      [']'] = { action = 'close', pair = '[]', neigh_pattern = '[^\\].' },
+      ['}'] = { action = 'close', pair = '{}', neigh_pattern = '[^\\].' },
+
+      ['"'] = { action = 'closeopen', pair = '""', neigh_pattern = '[^\\].', register = { cr = false } },
+      ["'"] = { action = 'closeopen', pair = "''", neigh_pattern = '[^%a\\].', register = { cr = false } },
+      ['`'] = { action = 'closeopen', pair = '``', neigh_pattern = '[^\\].', register = { cr = false } },
     },
   }
 
+  vim.pack.add({gh 'nvim-lualine/lualine.nvim'})
+  require('lualine').setup {
+    options = {
+      theme = 'gruvbox_dark',
+      component_separators = '',
+      section_separators = { left = "", right = "" },
+      globalstatus = true,
+    },
+    sections = {
+      lualine_a = {
+        { 'mode', right_padding = 2 },
+      },
+      lualine_b = {
+        { 'branch', icon = '\u{e702}' },
+        { 'diff' },
+      },
+      lualine_c = {
+        { 'filename', path = 1 },
+        { 'diagnostics' },
+      },
+      lualine_x = {
+        { 'lsp_status' }, -- or use 'lsp_progress' if you have that plugin
+      },
+      lualine_y = {},
+      lualine_z = {
+        {
+          function()
+            return os.date '%Y-%m-%d %I:%M %p'
+          end,
+          left_padding = 2,
+        },
+      },
+    },
+  }
 end
 
 -- ============================================================
