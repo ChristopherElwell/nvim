@@ -37,7 +37,6 @@ do
   --  See `:help 'clipboard'`
   vim.schedule(function() vim.o.clipboard = 'unnamedplus' end)
 
-  -- Enable break indent
   vim.o.breakindent = true
 
   -- Enable undo/redo changes even after closing and reopening a file
@@ -359,7 +358,7 @@ do
       ["'"] = { action = 'closeopen', pair = "''", neigh_pattern = '[^%a\\].', register = { cr = false } },
       ['`'] = { action = 'closeopen', pair = '``', neigh_pattern = '[^\\].', register = { cr = false } },
     },
-  }
+  })
 
   vim.pack.add({gh 'nvim-lualine/lualine.nvim'})
   require('lualine').setup {
@@ -644,6 +643,7 @@ do
     cssls = {}, -- CSS
     ts_ls = {}, -- Typescript/Javascript
     stylua = {}, -- Used to format Lua code
+    clangd = {},
 
     -- Special Lua Config, as recommended by neovim help docs
     lua_ls = {
@@ -693,7 +693,7 @@ do
 
   -- Translates between nvim-lspconfig server names and mason.nvim package names (e.g. lua_ls <-> lua-language-server)
   require('mason-lspconfig').setup {
-    automatic_enable = false, -- Change this to true if you want to automatically enable servers that are installed manually (e.g. via :Mason / :MasonInstall)
+    automatic_enable = false,
   }
 
   -- Ensure the servers and tools above are installed
@@ -899,29 +899,6 @@ end
 -- My stuff
 -- ============================================================
 
--- Neo-Tree
-vim.pack.add {
-  gh 'nvim-neo-tree/neo-tree.nvim',
-  gh 'nvim-lua/plenary.nvim',
-  gh 'nvim-tree/nvim-web-devicons',
-  gh 'MunifTanjim/nui.nvim',
-}
-require('neo-tree').setup {
-  close_if_last_window = true,
-  filesystem = {
-    filtered_items = {
-      visible = false, -- set true if you want dotfiles/hidden files shown by default
-      hide_dotfiles = true,
-      hide_gitignored = true,
-    },
-    follow_current_file = { enabled = true },
-  },
-  window = {
-    width = 30,
-  },
-}
-vim.keymap.set('n', '<leader>e', '<cmd>Neotree toggle<cr>', { desc = 'Toggle file [E]xplorer' })
-
 -- Toggle Term
 vim.pack.add { gh 'akinsho/toggleterm.nvim' }
 
@@ -935,7 +912,6 @@ require('toggleterm').setup {
 vim.pack.add {
   gh 'NeogitOrg/neogit',
   gh 'sindrets/diffview.nvim',
-  gh 'nvim-lua/plenary.nvim',    -- neogit dependency
   gh 'nvim-telescope/telescope.nvim', -- optional, gives neogit nicer branch/commit pickers
 }
 
@@ -945,25 +921,71 @@ require('neogit').setup {
   },
 }
 
-require('diffview').setup {}
-
-vim.keymap.set('n', '<leader>gg', '<cmd>Neogit<cr>', { desc = '[G]it status/[G]raph' })
-vim.keymap.set('n', '<leader>gh', '<cmd>DiffviewFileHistory<cr>', { desc = '[G]it file [H]istory' })
-vim.keymap.set('n', '<leader>gb', '<cmd>DiffviewOpen main...HEAD<cr>', { desc = '[G]it diff vs [B]ranch' })
-
 vim.pack.add {
   gh 'kdheepak/lazygit.nvim',
-  gh 'nvim-lua/plenary.nvim', -- dependency
 }
 
 vim.keymap.set('n', '<leader>lg', '<cmd>LazyGit<cr>', { desc = '[G]it ([G]ui via lazygit)' })
 
 -- Web
 vim.pack.add({
-  'https://github.com/mattn/emmet-vim',
-  'https://github.com/norcalli/nvim-colorizer.lua',
-  'https://github.com/windwp/nvim-ts-autotag',
+  gh 'mattn/emmet-vim',
+  gh 'catgoose/nvim-colorizer.lua',
+  gh 'windwp/nvim-ts-autotag',
 })
 
 require('colorizer').setup()
 require('nvim-ts-autotag').setup()
+
+vim.pack.add({
+  gh "/mikavilpas/yazi.nvim",
+})
+
+require("yazi").setup({
+  open_for_directories = false,
+  keymaps = {
+    show_help = "<f1>",
+  },
+})
+
+vim.keymap.set({ "n", "v" }, "<leader>-", function()
+  require("yazi").yazi()
+end, { desc = "Open yazi at the current file" })
+
+vim.keymap.set("n", "<leader>cw", function()
+  require("yazi").yazi(nil, vim.fn.getcwd())
+end, { desc = "Open yazi in nvim's working directory" })
+
+vim.keymap.set("n", "<c-up>", function()
+  require("yazi").toggle()
+end, { desc = "Resume the last yazi session" })
+
+vim.pack.add({
+  gh "abecodes/tabout.nvim"
+})
+require('tabout').setup({
+  tabkey = '<Tab>',             -- key to trigger tabout
+  backwards_tabkey = '<S-Tab>', -- key to trigger backwards tabout
+  act_as_tab = true,            -- fallback to normal tab behavior if not in a closing pair
+  act_as_shift_tab = false,     -- fallback to normal shift-tab behavior
+  default_tab = '<C-t>',        -- if act_as_tab is false, this key does normal tab
+  default_shift_tab = '<C-d>',  -- if act_as_shift_tab is false, this key does normal shift-tab
+  enable_backwards = true,
+  completion = true,            -- if a completion menu is open, use tabout to escape it too
+  tabouts = {
+    { open = "'", close = "'" },
+    { open = '"', close = '"' },
+    { open = '`', close = '`' },
+    { open = '(', close = ')' },
+    { open = '[', close = ']' },
+    { open = '{', close = '}' },
+  },
+  ignore_beginning = true,      -- don't trigger if cursor is at the very start of the closing pair
+  exclude = {},                 -- filetypes to disable tabout in
+})
+
+-- Vim config shortcuts
+vim.keymap.set('n', '<leader>ov', ':e $MYVIMRC<CR>', { desc = 'Open init.lua' })
+vim.keymap.set('n', '<leader>rv', ':source $MYVIMRC<CR>', { desc = 'Reload init.lua' })
+
+
