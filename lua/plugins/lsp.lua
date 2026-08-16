@@ -64,7 +64,6 @@ local servers = {
   html = {},
   cssls = {},
   ts_ls = {},
-  stylua = {}, -- used to format Lua code
   clangd = {},
 
   lua_ls = {
