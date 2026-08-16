@@ -1,6 +1,6 @@
 -- ============================================================
 -- UI / core UX plugins
--- guess-indent, gitsigns, which-key, colorscheme, todo-comments, mini modules, lualine
+-- guess-indent, which-key, colorscheme, todo-comments, mini modules, lualine
 -- ============================================================
 
 local gh = require('config.pack').gh
@@ -8,18 +8,6 @@ local gh = require('config.pack').gh
 -- Automatically detect and set indentation
 vim.pack.add { gh 'NMAC427/guess-indent.nvim' }
 require('guess-indent').setup {}
-
--- Git signs in the gutter + hunk utilities. See `:help gitsigns`
-vim.pack.add { gh 'lewis6991/gitsigns.nvim' }
-require('gitsigns').setup {
-  signs = {
-    add          = { text = '│' },
-    change       = { text = '│' },
-    delete       = { text = '_' },
-    topdelete    = { text = '‾' },
-    changedelete = { text = '│' },
-  },
-}
 
 -- Shows pending keybinds
 vim.pack.add { gh 'folke/which-key.nvim' }
