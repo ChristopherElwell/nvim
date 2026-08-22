@@ -49,7 +49,7 @@ require('todo-comments').setup { signs = false }
 vim.pack.add { gh 'nvim-lualine/lualine.nvim' }
 require('lualine').setup {
   options = {
-    theme = 'tokyonight',
+    theme = 'auto',
     component_separators = '',
     section_separators = { left = '\u{E0B4}', right = '\u{E0B6}' },
     globalstatus = true,
