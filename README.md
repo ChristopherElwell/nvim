@@ -1,5 +1,5 @@
 # Install Steps
-## Winget
+1. Winget
 ```
 winget install Git.Git
 winget install BurntSushi.ripgrep.MSVC
@@ -10,5 +10,5 @@ winget install zig.zig
 winget install Python.Python.3.13
 winget install Microsoft.WindowsTerminal
 ````
-## Clone this repo
+2. Clone this repo
 
