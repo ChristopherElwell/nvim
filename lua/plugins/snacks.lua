@@ -22,7 +22,11 @@ require('snacks').setup {
   },
 
   opts = {
-    explorer = { enabled = true },
+    explorer = { 
+      enabled = true,
+      hidden = true,
+      ignored = true,
+      },
     picker = { enabled = true },
     indent = { enabled = true },
     words = { enabled = true },
