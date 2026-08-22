@@ -56,6 +56,7 @@ vim.keymap.set('n', '<leader>sc', function() picker.commands() end, { desc = '[S
 vim.keymap.set('n', '<leader><leader>', function() picker.buffers() end, { desc = '[ ] Find existing buffers' })
 vim.keymap.set('n', '<leader>sp', function() picker.projects() end, { desc = '[S]earch [P]rojects' })
 vim.keymap.set('n', '<leader>sn', function() picker.files { cwd = vim.fn.stdpath 'config' } end, { desc = '[S]earch [N]eovim files' })
+vim.keymap.set('n', '<leader>st', function() picker.colorschemes() end, { desc = '[S]earch [T]hemes' })
 vim.keymap.set('n', '<leader>/', function() picker.lines() end, { desc = '[/] Fuzzily search in current buffer' })
 
 -- Add snacks-based LSP pickers when an LSP attaches to a buffer.
