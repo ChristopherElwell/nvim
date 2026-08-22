@@ -43,26 +43,3 @@ require('blink.cmp').setup {
 
   signature = { enabled = true },
 }
-
--- [[ Tabout ]]
-vim.pack.add { gh 'abecodes/tabout.nvim' }
-require('tabout').setup {
-  tabkey = '<A-l>',
-  backwards_tabkey = '<A-h>',
-  act_as_tab = true,
-  act_as_shift_tab = false,
-  default_tab = '<C-t>',
-  default_shift_tab = '<C-d>',
-  enable_backwards = true,
-  completion = true, -- use tabout to escape an open completion menu too
-  tabouts = {
-    { open = "'", close = "'" },
-    { open = '"', close = '"' },
-    { open = '`', close = '`' },
-    { open = '(', close = ')' },
-    { open = '[', close = ']' },
-    { open = '{', close = '}' },
-  },
-  ignore_beginning = true,
-  exclude = {},
-}
