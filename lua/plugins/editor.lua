@@ -76,6 +76,7 @@ require('floaterm').setup {
   border = false,
 }
 vim.keymap.set('n', '<c-\\>', '<cmd>FloatermToggle<CR>')
+vim.keymap.set('t', '<c-\\>', '<cmd>FloatermToggle<CR>')
 
 -- Markdown, LaTeX
 vim.pack.add { gh 'OXY2DEV/markview.nvim' }
