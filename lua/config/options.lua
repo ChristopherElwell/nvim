@@ -18,6 +18,27 @@ vim.o.mouse = 'a'
 vim.o.showmode = false
 vim.o.wrap = false;
 
+-- Control which files get wrapped
+local prose_filetypes = {
+  "markdown",
+  "text",
+  "gitcommit",
+  "tex",
+  "rst",
+  "asciidoc",
+  "mail",
+  "json"
+}
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = prose_filetypes,
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.linebreak = true   -- wrap at word boundaries, not mid-word
+    vim.opt_local.textwidth = 0      -- don't hard-wrap unless you want that
+  end,
+})
+
 -- Sync clipboard between OS and Neovim, scheduled after UiEnter to avoid
 -- slowing down startup. Remove if you want the OS clipboard independent.
 vim.schedule(function() vim.o.clipboard = 'unnamedplus' end)
