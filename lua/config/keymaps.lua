@@ -46,6 +46,9 @@ end, { desc = 'Open Config Dir' })
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Scroll down and center' })
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Scroll up and center' })
 
+-- Save all and restart
+vim.keymap.set('n', '<leader>rr', function() vim.cmd('wa') vim.cmd('restart') end, { desc = 'Save all and restart Nvim' })
+
 -- Highlight when yanking (copying) text. See `:help vim.hl.on_yank()`
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
