@@ -39,7 +39,8 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Vim config shortcuts
-vim.keymap.set('n', '<leader>oc', ':e $MYVIMRC<CR>', { desc = 'Open Config' })
+vim.keymap.set('n', '<leader>oc', function() vim.cmd('cd ' .. vim.fn.stdpath('config')) Snacks.picker.files()
+end, { desc = 'Open Config Dir' })
 
 -- Page up and down modification
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Scroll down and center' })
