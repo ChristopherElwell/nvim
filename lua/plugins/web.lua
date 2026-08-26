@@ -10,5 +10,9 @@ vim.pack.add {
   gh 'windwp/nvim-ts-autotag',
 }
 
-require('colorizer').setup()
+require('colorizer').setup{
+  filetypes = {
+    "css"
+  }
+}
 require('nvim-ts-autotag').setup()
