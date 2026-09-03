@@ -85,3 +85,43 @@ set_gitsigns_colors()
 vim.api.nvim_create_autocmd('ColorScheme', {
   callback = set_gitsigns_colors,
 })
+
+vim.pack.add{gh 'sindrets/diffview.nvim'}
+local actions = require("diffview.actions")
+vim.keymap.set("n", "<leader>gd", "<Cmd>DiffviewOpen<CR>", {
+    desc = "Open Diffview",
+})
+
+vim.keymap.set("n", "<leader>gh", "<Cmd>DiffviewFileHistory<CR>", {
+    desc = "Git file history",
+})
+
+vim.keymap.set("n", "<leader>gc", "<Cmd>DiffviewClose<CR>", {
+    desc = "Close Diffview",
+})
+require("diffview").setup({
+    enhanced_diff_hl = true,
+    use_icons = true,
+    show_help_hints = true,
+    watch_index = true,
+
+    view = {
+        default = {
+            layout = "diff2_horizontal",
+            disable_diagnostics = false,
+            winbar_info = false,
+        },
+
+        merge_tool = {
+            layout = "diff3_horizontal",
+            disable_diagnostics = true,
+            winbar_info = true,
+        },
+
+        file_history = {
+            layout = "diff2_horizontal",
+            position = "bottom",
+            height = 16,
+        },
+    }
+})
