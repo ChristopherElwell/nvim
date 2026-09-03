@@ -85,5 +85,8 @@ require('lualine').setup {
 
 -- Cellular Automaton
 vim.pack.add { gh 'eandrju/cellular-automaton.nvim' }
-vim.keymap.set('n', '<leader>fml', '<cmd>CellularAutomaton make_it_rain<CR>')
+vim.keymap.set('n', '<leader>ca', '<cmd>CellularAutomaton make_it_rain<CR>')
+
+-- Rainbow Brackets 
+vim.pack.add { gh 'HiPhish/rainbow-delimiters.nvim' }
 
