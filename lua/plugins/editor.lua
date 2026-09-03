@@ -67,16 +67,18 @@ require('mini.pairs').setup {
 }
 require('mini.comment').setup()
 
--- Floating terminal and color editor
-vim.pack.add {
-  gh 'nvzone/floaterm',
-  gh 'nvzone/volt',
-}
-require('floaterm').setup {
-  border = false,
-}
-vim.keymap.set('n', '<c-\\>', '<cmd>FloatermToggle<CR>')
-vim.keymap.set('t', '<c-\\>', '<cmd>FloatermToggle<CR>')
+-- Toggle Term
+vim.pack.add{gh "akinsho/toggleterm.nvim"}
+require("toggleterm").setup({
+  direction = "vertical",
+  size = 80,  -- fixed sidebar width
+  open_mapping = [[<c-\>]],
+})
+vim.keymap.set("n", "<leader>t1", "<cmd>1ToggleTerm direction=vertical<CR>")
+vim.keymap.set("n", "<leader>t2", "<cmd>2ToggleTerm direction=vertical<CR>")
+vim.keymap.set("n", "<leader>t3", "<cmd>3ToggleTerm direction=vertical<CR>")
+vim.keymap.set("n", "<leader>tn", function() require("toggleterm").next_terminal() end)
+vim.keymap.set("n", "<leader>tp", function() require("toggleterm").prev_terminal() end)
 
 -- Markdown, LaTeX
 vim.pack.add { gh 'OXY2DEV/markview.nvim' }
