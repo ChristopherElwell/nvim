@@ -21,16 +21,21 @@ require('snacks').setup {
     },
   },
 
-  opts = {
-    explorer = { 
-      enabled = true,
-      hidden = true,
-      ignored = true,
-      },
-    picker = { enabled = true },
-    indent = { enabled = true },
-    words = { enabled = true },
+  explorer = { 
+    enabled = true,
+    hidden = true,
+    ignored = true,
   },
+  picker = {
+    enabled = true,
+    sources = {
+      files = { hidden = true},
+      grep = { hidden = true},
+      explorer = { hidden = true, ignored = true }
+    }
+  },
+  indent = { enabled = true },
+  words = { enabled = true },
 }
 
 vim.keymap.set('n', '<leader>bd', function()
