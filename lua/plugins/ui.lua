@@ -90,3 +90,36 @@ vim.keymap.set('n', '<leader>ca', '<cmd>CellularAutomaton make_it_rain<CR>')
 -- Rainbow Brackets 
 vim.pack.add { gh 'HiPhish/rainbow-delimiters.nvim' }
 
+-- Coloured line number
+vim.pack.add { gh 'mawkler/modicator.nvim'}
+require("modicator").setup({})
+
+-- Better search info
+vim.pack.add {gh 'kevinhwang91/nvim-hlslens'}
+require("hlslens").setup()
+local kopts = {noremap = true, silent = true}
+vim.keymap.set('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+
+--Tiny cmdline
+vim.pack.add({ gh 'rachartier/tiny-cmdline.nvim' })
+require("vim._core.ui2").enable({})
+vim.o.cmdheight = 0
+vim.g.tiny_cmdline = {
+    width = { value = "70%" },
+}
+vim.pack.add({ "https://github.com/rachartier/tiny-cmdline.nvim" })
+
+local function get_hl(name)
+  return vim.api.nvim_get_hl(0, { name = name, link = false })
+end
+
+local function set_tiny_cmdline_bg()
+  local normal_bg = get_hl("Normal").bg
+  local border_fg = get_hl("FloatBorder").fg -- your liked border colour, resolved fully
+
+  vim.api.nvim_set_hl(0, "TinyCmdlineNormal", { bg = normal_bg })
+  vim.api.nvim_set_hl(0, "TinyCmdlineBorder", { fg = border_fg, bg = normal_bg })
+end
+
+set_tiny_cmdline_bg()
+vim.api.nvim_create_autocmd("ColorScheme", { callback = set_tiny_cmdline_bg })
