@@ -35,13 +35,13 @@ on_attach = function(bufnr)
   end
 
   -- Navigation - jumps to next/prev hunk, wraps with count, works with quickfix too
-  map('n', ']c', function()
+  map('n', ']h', function()
     if vim.wo.diff then return ']c' end
     vim.schedule(function() gs.nav_hunk('next') end)
     return '<Ignore>'
   end, 'Next hunk', { expr = true })
 
-  map('n', '[c', function()
+  map('n', '[h', function()
     if vim.wo.diff then return '[c' end
     vim.schedule(function() gs.nav_hunk('prev') end)
     return '<Ignore>'
