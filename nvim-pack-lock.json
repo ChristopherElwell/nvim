@@ -98,6 +98,10 @@
       "rev": "aafc9e8e0afe6bf57580858a2849578d8d8db9e0",
       "src": "https://github.com/nvzone/minty"
     },
+    "modicator.nvim": {
+      "rev": "7f867b4980946f115f4ccb922637d70d89a59cb4",
+      "src": "https://github.com/mawkler/modicator.nvim"
+    },
     "neo-tree.nvim": {
       "rev": "47a8e3e58d5b8d478d3342c8bdad067a01b59336",
       "src": "https://github.com/nvim-neo-tree/neo-tree.nvim"
@@ -113,6 +117,10 @@
     "nvim-colorizer.lua": {
       "rev": "72a05f62c52241bc7441c820eb53946f92b2e6a4",
       "src": "https://github.com/catgoose/nvim-colorizer.lua"
+    },
+    "nvim-hlslens": {
+      "rev": "be2d7b2be01860b5445a007ff2bc72b29896db6b",
+      "src": "https://github.com/kevinhwang91/nvim-hlslens"
     },
     "nvim-lspconfig": {
       "rev": "43ed3797b266e1ee8d222e491379ad471c9d3146",
@@ -139,6 +147,10 @@
       "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
+    "rainbow-delimiters.nvim": {
+      "rev": "012f1480cd9a5fc99fce7678e0a536421a53fc46",
+      "src": "https://github.com/HiPhish/rainbow-delimiters.nvim"
+    },
     "snacks.nvim": {
       "rev": "882c996cf28183f4d63640de0b4c02ec886d01f2",
       "src": "https://github.com/folke/snacks.nvim"
@@ -155,6 +167,10 @@
       "rev": "427b576c16792edad01a92b89721d923c19ad60f",
       "src": "https://github.com/nvim-telescope/telescope.nvim"
     },
+    "tiny-cmdline.nvim": {
+      "rev": "e247d9ee4c980734f8f8bf616d31e0ab7c27485d",
+      "src": "https://github.com/rachartier/tiny-cmdline.nvim"
+    },
     "todo-comments.nvim": {
       "rev": "31e3c38ce9b29781e4422fc0322eb0a21f4e8668",
       "src": "https://github.com/folke/todo-comments.nvim"
@@ -166,6 +182,10 @@
     "tokyonight.nvim": {
       "rev": "cdc07ac78467a233fd62c493de29a17e0cf2b2b6",
       "src": "https://github.com/folke/tokyonight.nvim"
+    },
+    "vim-abolish": {
+      "rev": "dcbfe065297d31823561ba787f51056c147aa682",
+      "src": "https://github.com/tpope/vim-abolish"
     },
     "volt": {
       "rev": "620de1321f275ec9d80028c68d1b88b409c0c8b1",
