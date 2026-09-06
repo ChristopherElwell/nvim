@@ -118,26 +118,18 @@ require("hlslens").setup()
 local kopts = {noremap = true, silent = true}
 vim.keymap.set('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
 
---Tiny cmdline
-vim.pack.add({ gh 'rachartier/tiny-cmdline.nvim' })
-require("vim._core.ui2").enable({})
-vim.o.cmdheight = 0
-vim.g.tiny_cmdline = {
-    width = { value = "70%" },
-}
-vim.pack.add({ "https://github.com/rachartier/tiny-cmdline.nvim" })
+-- Color column
+local colorcolumn_enabled = false
 
-local function get_hl(name)
-  return vim.api.nvim_get_hl(0, { name = name, link = false })
+local function toggle_colorcolumn()
+  colorcolumn_enabled = not colorcolumn_enabled
+  local value = colorcolumn_enabled and '80' or ''
+
+  vim.o.colorcolumn = value -- default for windows opened from now on
+
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    vim.api.nvim_set_option_value('colorcolumn', value, { win = win })
+  end
 end
 
-local function set_tiny_cmdline_bg()
-  local normal_bg = get_hl("Normal").bg
-  local border_fg = get_hl("FloatBorder").fg -- your liked border colour, resolved fully
-
-  vim.api.nvim_set_hl(0, "TinyCmdlineNormal", { bg = normal_bg })
-  vim.api.nvim_set_hl(0, "TinyCmdlineBorder", { fg = border_fg, bg = normal_bg })
-end
-
-set_tiny_cmdline_bg()
-vim.api.nvim_create_autocmd("ColorScheme", { callback = set_tiny_cmdline_bg })
+vim.keymap.set('n', '<leader>tr', toggle_colorcolumn, { desc = '[T]oggle 80-char [R]uler (global)' })
