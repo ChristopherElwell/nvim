@@ -22,9 +22,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
     map('gra', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
 
-    -- WARN: this is Goto Declaration, not Goto Definition (e.g. in C this goes to the header)
-    map('grD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-
     -- Highlight references of the word under the cursor while it rests there,
     -- and clear the highlight again once the cursor moves.
     local client = vim.lsp.get_client_by_id(event.data.client_id)

@@ -21,7 +21,7 @@ require('snacks').setup {
     },
   },
 
-  explorer = { 
+  explorer = {
     enabled = true,
     hidden = true,
     ignored = true,
@@ -80,6 +80,17 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set('n', 'gO', function() picker.lsp_symbols() end, { buffer = buf, desc = 'Open Document Symbols' })
     vim.keymap.set('n', 'gW', function() picker.lsp_workspace_symbols() end, { buffer = buf, desc = 'Open Workspace Symbols' })
     vim.keymap.set('n', 'grt', function() picker.lsp_type_definitions() end, { buffer = buf, desc = '[G]oto [T]ype Definition' })
+    vim.keymap.set('n', 'grD', function()
+      picker.lsp_definitions({ confirm = { action = 'jump', cmd = 'vsplit' } })
+    end, { buffer = buf, desc = '[G]oto [D]efinition (split)' })
+
+    vim.keymap.set('n', 'grI', function()
+      picker.lsp_implementations({ confirm = { action = 'jump', cmd = 'vsplit' } })
+    end, { buffer = buf, desc = '[G]oto [I]mplementation (split)' })
+
+    vim.keymap.set('n', 'grT', function()
+      picker.lsp_type_definitions({ confirm = { action = 'jump', cmd = 'vsplit' } })
+    end, { buffer = buf, desc = '[G]oto [T]ype Definition (split)' })
   end,
 })
 
