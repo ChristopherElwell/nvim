@@ -34,8 +34,9 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = prose_filetypes,
   callback = function()
     vim.opt_local.wrap = true
-    vim.opt_local.linebreak = true   -- wrap at word boundaries, not mid-word
-    vim.opt_local.textwidth = 0      -- don't hard-wrap unless you want that
+    vim.opt_local.linebreak = true
+    vim.opt_local.textwidth = 80
+  vim.opt_local.formatoptions:append("t")
   end,
 })
 
