@@ -72,7 +72,13 @@ require('lualine').setup {
       { 'diagnostics' },
     },
     lualine_c = {
-      { 'filename', path = 1 },
+      {
+        'filename',
+        path = 1,
+        cond = function()
+          return vim.bo.buftype ~= 'terminal'
+        end,
+      },
       {
         'navic',
         color_correction = 'static', -- fixes icon colors against non-default backgrounds
