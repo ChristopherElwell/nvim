@@ -66,6 +66,54 @@ local servers = {
   ts_ls = {},
   clangd = {},
 
+  -- LaTeX: compilation, diagnostics, completion, forward search
+  texlab = {
+    settings = {
+      texlab = {
+        build = {
+          -- Mirrors the build/ split: aux/log/fls junk -> build/, PDF stays put.
+          executable = 'latexmk',
+          args = {
+            '-pdf',
+            '-interaction=nonstopmode',
+            '-synctex=1',
+            '-aux-directory=build',
+            '-outdir=out',
+            '%f',
+          },
+          onSave = true,
+          forwardSearchAfter = true,
+        },
+        forwardSearch = {
+          -- SumatraPDF auto-reloads and doesn't lock the file, unlike Chrome/Adobe.
+          executable = 'SumatraPDF',
+          args = { '-reuse-instance', '-forward-search', '%f', '%l', '%p' },
+        },
+        chktex = { onOpenAndSave = true },
+        diagnosticsDelay = 300,
+        latexFormatter = 'latexindent',
+        bibtexFormatter = 'texlab',
+      },
+    },
+  },
+
+  -- Grammar/spelling for prose (cover letters). Mason package is
+  -- "ltex-ls" but the lspconfig/server name is "ltex" -- mason-tool-
+  -- installer translates this automatically via mason-lspconfig's
+  -- mapping table, so leave the key as "ltex" here.
+  ltex = {
+    filetypes = { 'tex', 'plaintex', 'bib', 'markdown' },
+    settings = {
+      ltex = {
+        language = 'en-US',
+        dictionary = {
+          ['en-US'] = { 'texlab', 'latexmk', 'nvim', 'SumatraPDF' },
+        },
+        additionalRules = { enablePickyRules = true },
+      },
+    },
+  },
+
   lua_ls = {
     on_init = function(client)
       client.server_capabilities.documentFormattingProvider = false -- formatting is done by stylua
