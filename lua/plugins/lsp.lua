@@ -52,6 +52,35 @@ vim.api.nvim_create_autocmd('LspAttach', {
     if client and client:supports_method('textDocument/inlayHint', event.buf) then
       map('<leader>th', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = event.buf }) end, '[T]oggle Inlay [H]ints')
     end
+
+    -- Snacks keymaps
+    local picker = Snacks.picker
+    local buf = event.buf
+    vim.keymap.set('n', 'grr', function() picker.lsp_references() end, { buffer = buf, desc = '[G]oto [R]eferences' })
+    vim.keymap.set('n', 'gri', function() picker.lsp_implementations() end, { buffer = buf, desc = '[G]oto [I]mplementation' })
+    vim.keymap.set('n', 'grd', function() picker.lsp_definitions() end, { buffer = buf, desc = '[G]oto [D]efinition' })
+    vim.keymap.set('n', 'gO', function() picker.lsp_symbols() end, { buffer = buf, desc = 'Open Document Symbols' })
+    vim.keymap.set('n', 'gW', function() picker.lsp_workspace_symbols() end, { buffer = buf, desc = 'Open Workspace Symbols' })
+    vim.keymap.set('n', 'grt', function() picker.lsp_type_definitions() end, { buffer = buf, desc = '[G]oto [T]ype Definition' })
+    vim.keymap.set('n', 'grD', function()
+      picker.lsp_definitions({ confirm = { action = 'jump', cmd = 'vsplit' } })
+    end, { buffer = buf, desc = '[G]oto [D]efinition (split)' })
+
+    vim.keymap.set('n', 'grI', function()
+      picker.lsp_implementations({ confirm = { action = 'jump', cmd = 'vsplit' } })
+    end, { buffer = buf, desc = '[G]oto [I]mplementation (split)' })
+
+    vim.keymap.set('n', 'grT', function()
+      picker.lsp_type_definitions({ confirm = { action = 'jump', cmd = 'vsplit' } })
+    end, { buffer = buf, desc = '[G]oto [T]ype Definition (split)' })
+
+    --Breadcrumbs
+    local client = vim.lsp.get_client_by_id(event.data.client_id)
+
+    local navic = require('nvim-navic')
+    if client and client.server_capabilities.documentSymbolProvider then
+      navic.attach(client, buf)
+    end
   end,
 })
 

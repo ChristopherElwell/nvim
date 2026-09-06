@@ -45,6 +45,14 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 vim.pack.add { gh 'folke/todo-comments.nvim' }
 require('todo-comments').setup { signs = false }
 
+-- Breadcrumbs
+vim.pack.add({ "https://github.com/SmiteshP/nvim-navic" })
+
+local navic = require('nvim-navic')
+navic.setup({
+  highlight = true, -- lets navic use its own NavicText/NavicSeparator hl groups
+})
+
 -- Lualine
 vim.pack.add { gh 'nvim-lualine/lualine.nvim' }
 require('lualine').setup {
@@ -56,15 +64,19 @@ require('lualine').setup {
   },
   sections = {
     lualine_a = {
-      { 'mode', right_padding = 2 },
+      { 'mode', fmt = function(str) return str:sub(1, 1) end, right_padding = 2 },
     },
     lualine_b = {
       { 'branch', icon = '\u{e702}' },
       { 'diff' },
+      { 'diagnostics' },
     },
     lualine_c = {
       { 'filename', path = 1 },
-      { 'diagnostics' },
+      {
+        'navic',
+        color_correction = 'static', -- fixes icon colors against non-default backgrounds
+      },
     },
     lualine_x = {
       { 'lsp_status' },
