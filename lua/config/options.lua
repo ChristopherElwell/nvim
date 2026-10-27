@@ -17,6 +17,15 @@ vim.o.relativenumber = true
 vim.o.mouse = 'a'
 vim.o.showmode = false
 vim.o.wrap = false;
+vim.opt.conceallevel = 0
+
+function _G.project_name()
+  local root = vim.fs.root(0, ".git") or vim.fn.getcwd()
+  return vim.fn.fnamemodify(root, ":t")
+end
+
+vim.opt.title = true
+vim.opt.titlestring = "%{v:lua.project_name()} - nvim"tle = true;
 
 -- Control which files get wrapped
 local prose_filetypes = {
@@ -72,7 +81,7 @@ vim.opt.expandtab = true
 -- Preview substitutions live, as you type
 vim.o.inccommand = 'split'
 
-vim.o.cursorline = true
+vim.o.cursorline = false
 
 -- Minimal number of screen lines to keep above and below the cursor
 vim.o.scrolloff = 10

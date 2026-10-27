@@ -82,3 +82,13 @@ vim.keymap.set("n", "<leader>tp", function() require("toggleterm").prev_terminal
 
 -- Markdown, LaTeX
 vim.pack.add { gh 'OXY2DEV/markview.nvim' }
+
+local function report_cwd()
+  local cwd = vim.fn.getcwd()
+  local seq = '\27]9;9;"' .. cwd .. '"\27\\'
+  vim.api.nvim_chan_send(vim.v.stderr, seq)
+end
+
+vim.api.nvim_create_autocmd({ "VimEnter", "DirChanged", "FocusGained", "TabEnter" }, {
+  callback = report_cwd,
+})
