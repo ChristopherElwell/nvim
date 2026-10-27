@@ -27,23 +27,17 @@ vim.pack.add {
   gh 'morhetz/gruvbox',
   gh 'folke/tokyonight.nvim',
   gh 'rebelot/kanagawa.nvim',
+  gh 'rose-pine/neovim'
 }
 vim.opt.termguicolors = true
 vim.opt.background = 'dark'
 
-vim.cmd.colorscheme 'tokyonight-night'
-
-vim.api.nvim_create_autocmd('ColorScheme', {
-  callback = function()
-    local bg = vim.api.nvim_get_hl(0, { name = 'Normal' }).bg
-    vim.api.nvim_set_hl(0, 'NormalFloat', { bg = bg })
-    vim.api.nvim_set_hl(0, 'FloatBorder', { bg = bg })
-  end,
-})
-
--- Highlight TODO, NOTE, etc. in comments
-vim.pack.add { gh 'folke/todo-comments.nvim' }
-require('todo-comments').setup { signs = false }
+require('rose-pine').setup {
+  styles = {
+    transparency = true,
+  },
+}
+vim.cmd.colorscheme 'rose-pine'
 
 -- Breadcrumbs
 vim.pack.add({ "https://github.com/SmiteshP/nvim-navic" })
