@@ -21,13 +21,6 @@ require('snacks').setup {
     },
   },
   notifier = {enabled = true},
-  scroll = {
-    enabled = true,
-    animate = {
-        duration = { step = 10, total = 50 },
-        easing = "outCubic",
-      },
-  },
   explorer = {
     enabled = true,
     hidden = true,
