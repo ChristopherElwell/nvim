@@ -31,7 +31,13 @@ vim.pack.add {
 vim.opt.termguicolors = true
 vim.opt.background = 'dark'
 
-vim.cmd.colorscheme 'tokyonight-night'
+require('tokyonight').setup({
+  transparent = true,
+  styles = {
+    sidebars = "transparent", -- Sidebars like nvim-tree or neo-tree
+    floats = "transparent",   -- Floating windows
+  },
+})
 
 vim.api.nvim_create_autocmd('ColorScheme', {
   callback = function()
@@ -40,6 +46,8 @@ vim.api.nvim_create_autocmd('ColorScheme', {
     vim.api.nvim_set_hl(0, 'FloatBorder', { bg = bg })
   end,
 })
+
+vim.cmd.colorscheme 'tokyonight-night'
 
 -- Highlight TODO, NOTE, etc. in comments
 vim.pack.add { gh 'folke/todo-comments.nvim' }
