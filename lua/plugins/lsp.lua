@@ -8,7 +8,12 @@ local gh = require('config.pack').gh
 
 -- Status updates for LSP
 vim.pack.add { gh 'j-hui/fidget.nvim' }
-require('fidget').setup {}
+require('fidget').setup {
+progress = {
+    suppress_on_insert = false,
+    ignore = { "texlab", "ltex", 'ltex_plus'}, -- LSP servers to ignore
+  },
+}
 
 -- Runs whenever an LSP attaches to a buffer
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -131,6 +136,7 @@ local servers = {
     filetypes = { 'tex', 'plaintex', 'bib', 'markdown' },
     settings = {
       ltex = {
+        checkFrequency = 'save',
         language = 'en-US',
         dictionary = {
           ['en-US'] = { 'texlab', 'latexmk', 'nvim', 'SumatraPDF' },
