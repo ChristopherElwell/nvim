@@ -17,8 +17,8 @@ vim.diagnostic.config {
   },
   underline = { severity = { min = vim.diagnostic.severity.WARN } },
 
-  virtual_text = false, -- Text shows up at the end of the line
-  virtual_lines = false, -- Alternative: text shows up underneath the line
+  virtual_text = false,
+  virtual_lines = false,
 
   -- Auto open the float, so you can easily read the errors when jumping with `[d` and `]d`
   jump = {
@@ -58,7 +58,7 @@ vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Scroll up and center' })
 -- Save all and restart
 vim.keymap.set('n', '<leader>rr', function() vim.cmd('wa') vim.cmd('restart') end, { desc = 'Save all and restart Nvim' })
 
--- Highlight when yanking (copying) text. See `:help vim.hl.on_yank()`
+-- Highlight when yanking (copying) text.
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
