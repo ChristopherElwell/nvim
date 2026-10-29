@@ -12,7 +12,7 @@ require('guess-indent').setup {}
 -- Shows pending keybinds
 vim.pack.add { gh 'folke/which-key.nvim' }
 require('which-key').setup {
-  delay = 0,
+  delay = 500,
   icons = { mappings = vim.g.have_nerd_font },
   spec = {
     { '<leader>s', group = '[S]earch', mode = { 'n', 'v' } },
