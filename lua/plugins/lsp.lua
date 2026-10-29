@@ -122,8 +122,6 @@ local servers = {
         },
         chktex = { onOpenAndSave = true },
         diagnosticsDelay = 300,
-        latexFormatter = 'latexindent',
-        bibtexFormatter = 'texlab',
       },
     },
   },

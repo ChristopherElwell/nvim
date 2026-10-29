@@ -15,9 +15,10 @@ require('conform').setup {
       c = true,
       cpp = true,
       python = true,
+      tex = true,
     }
     if enabled_filetypes[vim.bo[bufnr].filetype] then
-      return { timeout_ms = 500 }
+      return { timeout_ms = 3000 }
     else
       return nil
     end
@@ -32,6 +33,14 @@ require('conform').setup {
     javascript = { 'prettier' },
     cpp = { 'clang-format' },
     c = { 'clang-format' },
+    tex = { 'tex-fmt', lsp_format = 'never' },
+  },
+  formatters = {
+    ['tex-fmt'] = {
+      prepend_args = {
+        '--config', vim.fs.normalize(vim.fn.stdpath('config') .. '/tex-fmt.toml'),
+      },
+    },
   },
 }
 

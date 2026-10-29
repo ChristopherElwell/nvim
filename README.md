@@ -16,6 +16,8 @@ winget install Python.Python.3.13
 winget install Microsoft.WindowsTerminal
 ```
 
+Also install tex-fmt
+
 > Restart your terminal (or sign out/in) afterward so the new installs are picked up on `PATH`. Verify with `nvim --version` — you need **0.12+** for `vim.pack` and the `ui2` cmdline used by this config.
 
 ## 2. Clone this repo

@@ -25,29 +25,7 @@ function _G.project_name()
 end
 
 vim.opt.title = true
-vim.opt.titlestring = "%{v:lua.project_name()} - nvim"tle = true;
-
--- Control which files get wrapped
-local prose_filetypes = {
-  "markdown",
-  "text",
-  "gitcommit",
-  "tex",
-  "rst",
-  "asciidoc",
-  "mail",
-  "json"
-}
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = prose_filetypes,
-  callback = function()
-    vim.opt_local.wrap = true
-    vim.opt_local.linebreak = true
-    vim.opt_local.textwidth = 80
-  vim.opt_local.formatoptions:append("t")
-  end,
-})
+vim.opt.titlestring = "%{v:lua.project_name()} - nvim"
 
 -- Sync clipboard between OS and Neovim, scheduled after UiEnter to avoid
 -- slowing down startup. Remove if you want the OS clipboard independent.
@@ -64,7 +42,7 @@ vim.o.smartcase = true
 
 vim.o.signcolumn = 'yes'
 vim.o.updatetime = 250
-vim.o.timeoutlen = 300
+vim.o.timeoutlen = 1000
 
 vim.o.splitright = true
 vim.o.splitbelow = true
